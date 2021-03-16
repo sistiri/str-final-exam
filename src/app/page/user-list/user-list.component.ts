@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/service/user.service';
 
@@ -12,12 +14,24 @@ export class UserListComponent implements OnInit {
 
   users$: Observable<User[]> = this.userService.getAll();
 
+  // user$: Observable<User> = this.activatedRoute.params.pipe(
+  //   switchMap(params => {
+  //     if (Number(params.id) === 0) {
+  //       return of(new User());
+  //     }
+
+  //     return this.userService.get(Number(params.id));
+  //   })
+  // );
+
   phrase: string = '';
 
   key: string = 'id';
 
   constructor(
     private userService: UserService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +54,21 @@ export class UserListComponent implements OnInit {
 
   setSorter(param: string): void {
     this.key = param;
+  }
+
+  onSubmit(user: User): void {
+
+    if (user.id !== 0) {
+      this.userService.update(user);
+      this.userService.getAll();
+      this.router.navigate(['/']);
+
+    } else {
+      this.userService.create(user);
+      this.userService.getAll();
+      this.router.navigate(['/']);
+
+    }
   }
 
 }

@@ -12,6 +12,11 @@
       </form>
   </div>
 
+  <!-- Add New Button -->
+  <button (click)="onSubmit(user)" [routerLink]="['user/' + '0']" class="btn btn-danger btn-block">
+    Add new user
+    </button>
+
     <!-- User List Table -->
     <table class="table table-striped">
       <thead>
