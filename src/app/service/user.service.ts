@@ -22,6 +22,7 @@ export class UserService {
    */
   getAll(): Observable<User[]> {
     return this.http.get<User[]>(`${this.endpoint}`);
+
   }
 
   /**
@@ -38,10 +39,8 @@ export class UserService {
    * The method is: this.http.delete
    */
 
-  remove(user: User): void {
-    this.http.delete<User>(`${this.endpoint}/${user.id}`).subscribe(
-      () => this.getAll()
-    );;
+  remove(user: User): Observable<User> {
+    return this.http.delete<User>(`${this.endpoint}/${user.id}`);
   }
 
 

@@ -19,8 +19,11 @@ export class UserListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onDelete(user: User): void {
+    if (confirm("Are you sure you want to delete the item?")){
+      this.userService.remove(user).subscribe();
+      // this.userService.getAll();
+    }
 
-  deleteUser(user: User): void {
-    this.userService.remove(user);
   }
 }
