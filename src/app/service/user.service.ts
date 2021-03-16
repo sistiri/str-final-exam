@@ -10,7 +10,7 @@ export class UserService {
 
   endpoint: string = 'http://localhost:3000/users';
 
-  userList$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
+  // userList$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
 
   constructor(
     private http: HttpClient
