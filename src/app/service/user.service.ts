@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../model/user';
 
 @Injectable({
@@ -9,6 +9,8 @@ import { User } from '../model/user';
 export class UserService {
 
   endpoint: string = 'http://localhost:3000/users';
+
+  userList$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
 
   constructor(
     private http: HttpClient
