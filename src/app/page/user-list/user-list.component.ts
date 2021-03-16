@@ -14,6 +14,8 @@ export class UserListComponent implements OnInit {
 
   phrase: string = '';
 
+  key: string = 'id';
+
   constructor(
     private userService: UserService,
   ) { }
@@ -35,4 +37,9 @@ export class UserListComponent implements OnInit {
   onChangePhrase(event: Event): void {
     this.phrase = (event.target as HTMLInputElement).value;
   }
+
+  setSorter(param: string): void {
+    this.key = param;
+  }
+
 }
